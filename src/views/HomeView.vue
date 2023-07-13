@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <form @submit.prevent="addRestaurant">
+      <label for="">Restaurant Name</label>
+      <input id="restaurant-name" v-model="newRestaurant.name" type="text" />
+      <input id="restaurant-name" v-model="newRestaurant.adress" type="text" />
+      <select
+        name="restaurant_status_select"
+        id="restaurant_status_select"
+        v-model="newRestaurant.status"
+      >
+        <option v-for="status in statusList" :value="status" :key="status">
+          {{ status }}
+        </option>
+      </select>
+      <input id="restaurant-name" v-model="newRestaurant.type" type="text" />
+      <button type="submit">Adicionar</button>
+    </form>
+    <ul v-for="restaurant in restaurantList" :key="restaurant.name">
+      <li>{{ restaurant.name }}</li>
+      <li>{{ restaurant.adress }}</li>
+      <li>{{ restaurant.status }}</li>
+      <li>{{ restaurant.type }}</li>
+    </ul>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class HomeView extends Vue {}
-</script>
+<script lang="ts" src="./HomeView.service.ts"></script>
